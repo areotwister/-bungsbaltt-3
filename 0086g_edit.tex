@@ -134,13 +134,15 @@ i+22
 \begin{verbatim}
 IVTE 2 # INT 0: Get user input over UART and save it in ACC
 IVTE <i> # INT 1: Print an integer stored in ACC over UART 
-SUBI SP 2 # start of ISR 0 at relative address 2 + 2^31    
+SUBI SP 3 # start of ISR 0 at relative address 2 + 2^31    
 STOREIN SP DS 1                                            
 STOREIN SP IN1 2                                           
+STOREIN SP IN2 3                                           
 # your reti code goes here                                 
 LOADIN SP DS 1                                             
 LOADIN SP IN1 2                                            
-ADDI SP 2                                                  
+LOADIN SP IN2 3                                            
+ADDI SP 3                                                  
 RTI                                                        
 SUBI SP 4 # start of ISR 1 at address <i> + 2^31           
 STOREIN SP DS 1                                            
