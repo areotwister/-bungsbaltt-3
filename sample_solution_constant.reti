@@ -9,9 +9,9 @@ INT 0
 INT 3
 # Konstante, bei der bit 31 auf 1 gesetzt ist
 # Als Beispiel hier: 0b10101010_10101010_11001100_11001100
-# Das Geht nicht so einfach, weil man durch multiplizieren eine Zahl nicht
-# plötzlich negativ (das MSB auf 1) bekommen kann ohne sich auf undefined
-# behaviour verlassen zu müssen
+# Das geht nicht so einfach, weil man durch Multiplizieren zweier positiver
+# Zahlen nicht plötzlich etwas Negatives (das MSB auf 1) rausbekommen kann,
+# ohne sich auf undefined behaviour verlassen zu müssen
 LOADI ACC -21846 # 0b101010_10101010 - 2**15 oder 0b11111_10101010_10101010 - 2**21
 MULTI ACC 65536
 ORI ACC 52428 # 0b11001100_11001100
