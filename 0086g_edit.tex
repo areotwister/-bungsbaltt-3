@@ -186,25 +186,16 @@ RTI
 }
 \begin{itemize}
 \item[a)]
-Schreiben Sie eine ISR, die eine Eingabe aus der UART empfängt
-und diese dann in den \texttt{ACC} schreibt.
-Schreiben Sie zunächst ein ReTI-Programm, dass in einer Schleife läuft und ständig überprüft ob b1
-im Statusregister R2 auf 1 gesetzt wurde, d.h. ob der CPU über die UART Daten in R1 bereitgestellt wurden.
-Wenn Daten (8-Bit) bereitgestellt wurden, soll ihr Programm diese in den \texttt{ACC} der ReTI laden
-und b1 wieder auf 0 setzen (sodass die UART wieder neue Daten in R1 schreiben darf).
+Schreiben Sie eine ISR, die eine 32-Bit Ganzzahl aus der UART in 8-Bit Packete aufgeteilt empfängt und diese dann in den \texttt{ACC} schreibt. Setzen sie zunächst b1 im Statusregister auf 0, um dem vom RETI-Interpreter simulierten Eingabegerät zu signalisieren, dass sie für den Empfang von Engaben bereit sind. Schreiben sie danach ReTI-Code, der in einer Schleife läuft und ständig überprüft ob b1 im Statusregister R2 auf 1 gesetzt wurde, d.h. ob der CPU über die UART Daten in R1 bereitgestellt wurden. Wenn Daten (8-Bit) bereitgestellt wurden, soll ihr Programm diese an die passende Stelle im \texttt{ACC} Register laden und b1 wieder auf 0 setzen (sodass die UART wieder neue Daten in R1 schreiben darf).
+
+Beachten Sie, dass Sie vor Zugriffen auf die UART im Datensegmentregister \texttt{DS} das entsprechende Präfix 01 benötigen. Sie müssen also die 32-Bit Konstante $010^{30}$ mit der Methode aus Aufgabe 1) in das \texttt{DS} Register bringen.
+
+\textbf{Anmerkung:} Interrupt-Service-Routinen müssen die ursprünglichen Registerinhalte auf dem Stack abspeichern. Nach Beendigung und vor Aufruf von \texttt{RTI} müssen diese dann wiederhergestellt werden.
 
 \item[b)]
 Schreiben Sie eine zweite ISR, die eine im \texttt{ACC} gespeicherte Ganzzahl über die UART versendet.
 Sie überprüfen also vor jedem Versenden, ob die UART bereit ist (b0 = 1) und das Senderegister befüllt werden darf.
-Dann befüllen Sie jeweils das Senderegister mit 8-Bit Portionen des Wortes in \texttt{ACC}.
-
-Beachten Sie, dass Sie vor Zugriffen auf die UART im Datensegmentregister
-\texttt{DS} das entsprechende Präfix 01 benötigen. Sie müssen also die 32-Bit Konstante 
-$010^{30}$ mit der Methode aus Aufgabe 1) in das \texttt{DS} Register bringen.
-
-\textbf{Anmerkung:} Interrupt-Service-Routinen müssen die ursprünglichen Registerinhalte
-		auf dem Stack abspeichern. Nach Beendigung und vor Aufruf von \texttt{RTI} müssen
-		diese dann wiederhergestellt werden.
+Dann befüllen Sie jeweils das Senderegister mit 8-Bit Packeten des Wortes in \texttt{ACC}.
 \end{itemize}
 
 	\texttt{interrupt\_service\_routines.reti}
