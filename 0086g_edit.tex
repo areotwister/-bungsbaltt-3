@@ -192,7 +192,7 @@ Beachten Sie, dass Sie vor Zugriffen auf die UART im Datensegmentregister \textt
 
 \item[b)]
 Schreiben Sie eine zweite ISR, die eine im \texttt{ACC} gespeicherte Ganzzahl über die UART versendet.
-Überprüfen Sie dazu vor jedem Versenden, ob die UART bereit ist (b0 = 1) und das Senderegister befüllt werden darf. Dann befüllen Sie jeweils das Senderegister R0 mit 8-Bit Packeten des Wortes im \texttt{ACC} Register und denken jedes mal daran b0 des Statusregister danach auf 0 zu setzen. Sie müssen weitere ähnliche Routinen für die verbleibenden 3 8-Bit Packete implementieren.
+Überprüfen Sie dazu vor jedem Versenden, ob die UART bereit ist (b0 = 1) und das Senderegister befüllt werden darf. Dann befüllen Sie jeweils das Senderegister R0 mit 8-Bit Packeten des Wortes im \texttt{ACC} Register und denken jedes mal daran b0 des Statusregister danach auf 0 zu setzen. % Sie müssen weitere ähnliche Routinen für die verbleibenden 3 8-Bit Packete implementieren.
 \end{itemize}
 
 	\texttt{interrupt\_service\_routines.reti}
