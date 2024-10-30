@@ -159,9 +159,6 @@ STORE ACC 0
 LOAD ACC 2                                                 
 ANDI ACC -2                                                
 STORE ACC 2                                                
-LOAD ACC 2                                                 
-ANDI ACC 1                                                 
-JUMP== -2                                                  
 # your reti code goes here                                      
 LOADIN SP DS 1                                             
 LOADIN SP IN1 2                                            
@@ -186,8 +183,8 @@ RTI
 }
 \begin{itemize}
 \item[a)]
-Schreiben Sie eine ISR, die eine 32-Bit Ganzzahl aus der UART in 8-Bit Packete aufgeteilt empfängt und diese dann in an die passende Stelle im \texttt{ACC} Register schreibt. 
-Setzen sie dazu zunächst b1 im Statusregister auf 0, um dem vom RETI-Interpreter simulierten Eingabegerät zu signalisieren, dass sie für den Empfang von Eingaben bereit sind. Schreiben sie danach ReTI-Code, der in einer Schleife läuft und ständig überprüft ob b1 im Statusregister R2 auf 1 gesetzt wurde, d.h. ob der CPU über die UART Daten in R1 bereitgestellt wurden. Wenn Daten (8-Bit) bereitgestellt wurden, soll ihr Programm diese an die passende Stelle im \texttt{ACC} Register laden und b1 wieder auf 0 setzen (sodass die UART wieder neue Daten in R1 schreiben darf).
+Schreiben Sie eine ISR, die eine 32-Bit Ganzzahl aus der UART in 8-Bit Packete aufgeteilt empfängt und diese dann in an die passenden Stellen im \texttt{ACC} Register schreibt. 
+Setzen sie dazu zunächst b1 im Statusregister auf 0, um dem vom RETI-Interpreter simulierten Eingabegerät zu signalisieren, dass sie für den Empfang von Eingaben bereit sind. Schreiben sie danach ReTI-Code, der in einer Schleife läuft und ständig überprüft ob b1 im Statusregister R2 auf 1 gesetzt wurde, d.h. ob der CPU über die UART Daten in R1 bereitgestellt wurden. Wenn Daten (8-Bit) bereitgestellt wurden, soll ihr Programm diese an die passende Stelle im \texttt{ACC} Register laden und b1 wieder auf 0 setzen (sodass die UART wieder neue Daten in R1 schreiben darf). Sie müssen weitere ähnliche Routinen für die verbleibenden 3 8-Bit Packete implementieren.
 
 Beachten Sie, dass Sie vor Zugriffen auf die UART im Datensegmentregister \texttt{DS} das entsprechende Präfix 01 benötigen. Sie müssen also die 32-Bit Konstante $010^{30}$ mit der Methode aus Aufgabe 1) in das \texttt{DS} Register bringen.
 
@@ -195,7 +192,7 @@ Beachten Sie, dass Sie vor Zugriffen auf die UART im Datensegmentregister \textt
 
 \item[b)]
 Schreiben Sie eine zweite ISR, die eine im \texttt{ACC} gespeicherte Ganzzahl über die UART versendet.
-Überprüfen Sie dazu vor jedem Versenden, ob die UART bereit ist (b0 = 1) und das Senderegister befüllt werden darf. Dann befüllen Sie jeweils das Senderegister R0 mit 8-Bit Packeten des Wortes im \texttt{ACC} Register und denken jedes mal daran b0 des Statusregister danach auf 0 zu setzen.
+Überprüfen Sie dazu vor jedem Versenden, ob die UART bereit ist (b0 = 1) und das Senderegister befüllt werden darf. Dann befüllen Sie jeweils das Senderegister R0 mit 8-Bit Packeten des Wortes im \texttt{ACC} Register und denken jedes mal daran b0 des Statusregister danach auf 0 zu setzen. Sie müssen weitere ähnliche Routinen für die verbleibenden 3 8-Bit Packete implementieren.
 \end{itemize}
 
 	\texttt{interrupt\_service\_routines.reti}
