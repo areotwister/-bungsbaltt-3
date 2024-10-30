@@ -1,6 +1,6 @@
 sram.bin
 hdd.bin
-*.pdf
+# *.pdf
 *.xopp
 *.log
 *.aux
