@@ -1,0 +1,19 @@
+# output: 1431647027 -1431647028 
+INT 3
+# Konstante, bei der bit 31 auf 0 gesetzt ist
+# Als Beispiel hier: 0b01010101_01010101_00110011_00110011
+LOADI ACC 349525 # 0b01010101_01010101
+MULTI ACC 65536
+ORI ACC 13107 # 0b110011_00110011
+INT 0
+INT 3
+# Konstante, bei der bit 31 auf 1 gesetzt ist
+# Als Beispiel hier: 0b10101010_10101010_11001100_11001100
+# Das Geht nicht so einfach, weil man durch multiplizieren eine Zahl nicht
+# plötzlich negativ (das MSB auf 1) bekommen kann ohne sich auf undefined
+# behaviour verlassen zu müssen
+LOADI ACC -21846 # 0b101010_10101010 - 2**15 oder 0b11111_10101010_10101010 - 2**21
+MULTI ACC 65536
+ORI ACC 52428 # 0b11001100_11001100
+INT 0
+JUMP 0

@@ -1,0 +1,79 @@
+\keywords{Memory Map}
+\history{e-sys-ws24}
+\begin{exercise}
+	Sie werden unter Verwendung von LOAD- und STORE-Befehlen immer wieder
+	abwechselnd mit einem Programm auf Adressen im Adressraum des EPROM (00), der 
+	UART (01) und des SRAM (1*)	zugreifen müssen.
+	
+	Daher muss das Datensegmentregister \verb_DS_ immer wieder neu belegt werden 
+	(für die Ergänzung der 22-Bit Adressen mit einem Präfix). 
+	
+	Beispiel UART: Offensichtlich ist es nicht möglich, einfach $w = 010...0$ (32 Stellen)
+	per \texttt{LOADI DS i} in \texttt{DS} zu laden, da \texttt{i} nur 22 Stellen erlaubt.
+
+	Eine Lösung wäre beispielsweise, die obersten 22 Bit von 
+
+	{\color{red}\verb_0100000000000000000000_}\verb_0000000000_
+
+	zu laden, per:
+
+	\verb_LOADI DS _{\color{red}\verb_0100000000000000000000_}
+
+	und dann um $10$ Stellen nach links zu shiften (per Multiplikation mit $2^{10}$).
+
+	Wir nehmen zudem an, dass nicht nur die obersten Bits interessant sind,
+	sondern die gesamte 32-Bit Konstante.
+	D.h. die unteren 10 Bit müssen noch nachgeladen werden (z.B. per \texttt{ORI}).
+
+	\emph{Bonus:} Besondere Vorsicht ist geboten, wenn Befehle geladen werden,
+	die an der vordersten Bit-Stelle eine 1 haben. Beim Shift per Multiplikation wird 
+	Zweier-Komplement angenommen und die vorderste Bit-Stelle wird u.U. immer 0 bleiben,
+	da zunächst von der Multiplikation mit einer positiven Zahl ausgegangen wird.
+	Können Sie sich eine Lösung vorstellen?
+
+	\textbf{Arbeitsanweisung:}
+
+	Schreiben Sie ein RETI-Programm \texttt{constants.reti}, das das 32-Bit-Wort 
+	
+	$-1431655766 = [10101010101010101010101010101010]_2$
+
+	lädt und im \texttt{ACC} speichert.
+
+	\textbf{Bitte testen Sie Ihr Programm mit dem RETI-Interpreter!} Nutzen Sie hierzu folgenden Befehl:
+	\begin{verbatim}
+		$ reti_interpreter -d constants.reti
+	\end{verbatim}
+	\nicebox{\textwidth}{
+	\textbf{Tipp:} Wenn Sie Schritt für Schritt durch das Programm `steppen' (per (n)ext instruction), wird Ihnen auffallen,
+	dass zunächst mal ein Initialisierungsprogramm auf dem EPROM abläuft (technisch notwendig, automatisch generiert).
+	Das braucht Sie für das Ausführen Ihres Programmes und die Überprüfung der Registerinhalte zunächst nicht zu interessieren.
+	Entweder sie setzen einen entsprechenden Breakpoint oder lassen das EPROM-Programm einfach ablaufen.
+	}
+
+\end{exercise}
+
+\begin{solution}
+Bezüglich Bonus: Man kann zunächst mal \texttt{LOADI <Zielreg> -1} machen, dann stehen nur 1en drin.
+Dann vielleicht per XOR a la \texttt{OPLUSI <Zielreg> 111..11} 21 Einsen zur 0 machen.
+Dann die \textbf{--- nach dem ersten Bit ---} 21 vordersten Bit des Wortes per \texttt{ORI} in \texttt{<Zielreg>} schreiben.
+10-mal shiften usw.
+
+Vollständig korrekte Lösung {\color{blue}(???)}, Annahme: Konstante $-1431655766 = 10101010101010101010101010101010$.
+{\color{blue}RETI-Interpreter zeigt Registerinhalte nicht als Zweierkomplement-Integer an. (Gibt es eine Option?)
+Kann sein, dass ich mich in den Stellen vertan habe.}
+\begin{verbatim}
+LOADI ACC -1
+OPLUSI ACC 2097151
+ORI ACC 699050
+MULTI ACC 1024
+ORI ACC 682
+JUMP 0
+\end{verbatim}
+
+\end{solution}
+
+\begin{sketch}
+
+
+\end{sketch}
+

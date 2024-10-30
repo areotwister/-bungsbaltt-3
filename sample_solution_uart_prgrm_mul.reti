@@ -1,0 +1,7 @@
+INT 3 # just a breakpoint, use c in debug mode -d to directly jump here
+INT 0
+MOVE ACC IN1
+INT 0
+MULT ACC IN1
+INT 1
+JUMP 0

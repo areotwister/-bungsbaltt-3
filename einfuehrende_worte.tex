@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage[parfill]{parskip}
+\usepackage[colorlinks=true, linkcolor=cyan, filecolor=cyan, urlcolor=cyan, citecolor=cyan]{hyperref}
+
+\newenvironment{adjustedminipage}[1]
+{\vspace{0.1cm}\begin{minipage}[t]{#1}}
+  {\end{minipage}\vspace{0.1cm}}
+
+\begin{document}
+\textcolor{red}{Unbedingt vor Bearbeitung des Blattes lesen:}
+
+{\LARGE\bfseries\textcolor{red}{Bitte}} benutzen Sie für alle RETI-Aufgaben die \textbf{neuste Version} des RETI-Interpreters unter der URL:
+
+\begin{center}
+	\begin{adjustedminipage}{0.9\textwidth}
+    \url{https://github.com/matthejue/RETI-interpreter}
+	\end{adjustedminipage}
+\end{center}
+
+\sloppy
+
+wie es in den jeweiligen Aufgaben beschrieben ist. In der \verb|README.md| im Repository finden sie eine Anleitung, wie Sie die neuste Version des RETI-Interpreters installieren bzw. zu dieser updaten können.
+
+Der RETI-Interpreter ist dazu in der Lage, die RETI-Befehle eines in einer \verb|.reti|-Datei angebenen RETI-Programms zu interpretieren, d.h. er kann das RETI-Programm \textbf{ausführen}, indem er die RETI-Befehle aus einer Datei \texttt{programm.reti} herausliest und in den simulierten SRAM schreibt und mithilfe eines autogenerierten EPROM-Startprogramms, dass zu Beginn ausgeführt wird an den Start dieses Programms springt.
+
+
+{\LARGE\bfseries\color{red}Bitte} geben Sie keine Programme mit \textbf{Syntax-Fehlern} ab! Wenn Ihre Programme unvollständig oder semantisch inkorrekt sind, informieren Sie Ihren Tutor darüber.
+\end{document}
