@@ -186,7 +186,7 @@ RTI
 }
 \begin{itemize}
 \item[a)]
-Schreiben Sie eine ISR, die eine 32-Bit Ganzzahl aus der UART in 8-Bit Packete aufgeteilt empfängt und diese dann in an die passende Stelle im \texttt{ACC} schreibt. Setzen sie zunächst b1 im Statusregister auf 0, um dem vom RETI-Interpreter simulierten Eingabegerät zu signalisieren, dass sie für den Empfang von Engaben bereit sind. Schreiben sie danach ReTI-Code, der in einer Schleife läuft und ständig überprüft ob b1 im Statusregister R2 auf 1 gesetzt wurde, d.h. ob der CPU über die UART Daten in R1 bereitgestellt wurden. Wenn Daten (8-Bit) bereitgestellt wurden, soll ihr Programm diese an die passende Stelle im \texttt{ACC} Register laden und b1 wieder auf 0 setzen (sodass die UART wieder neue Daten in R1 schreiben darf).
+Schreiben Sie eine ISR, die eine 32-Bit Ganzzahl aus der UART in 8-Bit Packete aufgeteilt empfängt und diese dann in an die passende Stelle im \texttt{ACC} Register schreibt. Setzen sie zunächst b1 im Statusregister auf 0, um dem vom RETI-Interpreter simulierten Eingabegerät zu signalisieren, dass sie für den Empfang von Engaben bereit sind. Schreiben sie danach ReTI-Code, der in einer Schleife läuft und ständig überprüft ob b1 im Statusregister R2 auf 1 gesetzt wurde, d.h. ob der CPU über die UART Daten in R1 bereitgestellt wurden. Wenn Daten (8-Bit) bereitgestellt wurden, soll ihr Programm diese an die passende Stelle im \texttt{ACC} Register laden und b1 wieder auf 0 setzen (sodass die UART wieder neue Daten in R1 schreiben darf).
 
 Beachten Sie, dass Sie vor Zugriffen auf die UART im Datensegmentregister \texttt{DS} das entsprechende Präfix 01 benötigen. Sie müssen also die 32-Bit Konstante $010^{30}$ mit der Methode aus Aufgabe 1) in das \texttt{DS} Register bringen.
 
