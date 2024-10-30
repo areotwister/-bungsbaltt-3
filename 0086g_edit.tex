@@ -190,7 +190,7 @@ Schreiben Sie eine ISR, die eine 32-Bit Ganzzahl aus der UART in 8-Bit Packete a
 
 Beachten Sie, dass Sie vor Zugriffen auf die UART im Datensegmentregister \texttt{DS} das entsprechende Präfix 01 benötigen. Sie müssen also die 32-Bit Konstante $010^{30}$ mit der Methode aus Aufgabe 1) in das \texttt{DS} Register bringen.
 
-\textbf{Anmerkung:} Interrupt-Service-Routinen müssen die ursprünglichen Registerinhalte auf dem Stack abspeichern. Nach Beendigung und vor Aufruf von \texttt{RTI} müssen diese dann wiederhergestellt werden.
+\textbf{Anmerkung:} Interrupt-Service-Routinen müssen die ursprünglichen Registerinhalte auf dem Stack absichern. Nach Beendigung und vor Aufruf von \texttt{RTI} müssen diese dann wiederhergestellt werden.
 
 \item[b)]
 Schreiben Sie eine zweite ISR, die eine im \texttt{ACC} gespeicherte Ganzzahl über die UART versendet.
